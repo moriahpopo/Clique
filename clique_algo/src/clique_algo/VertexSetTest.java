@@ -1,14 +1,23 @@
 package clique_algo;
 
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class VertexSetTest {
+	@Test
+	public void addtest(){
+		int j;
+		VertexSet ver1 = new VertexSet();
+		for (j = 0; j < 7; j++) {
+			ver1.add((int)Math.random());
+		}
+		 assertTrue(ver1.size() == 7);
+		//fail("Not yet implemented");
+	}
 
 	@Test
-	public void inittest() {
+	public void intersectiontest() {
 		VertexSet ver1 = new VertexSet();
 		ver1.add(2);
 		ver1.add(5);
@@ -23,11 +32,11 @@ public class VertexSetTest {
 		ver3.add(2);
 		ver3.add(3);
 		ver3.add(4);
-		assertEquols("must be 2,3,4 ", ver3.toString());
+		//String ans = "Set: |3| 2, 3, 4, ";
+		assertEquals("it must be 2, 3, 4", ver3.toString(), "Set: |3| 2, 3, 4, ");
 		//fail("Not yet implemented");
 	}
-	
-	
+		
 }
 
 
