@@ -27,10 +27,6 @@ import java.util.Vector;
 		_V = new  Vector <VertexSet>();
 		 init();
 	 }
-	 public double sizeOfE(){
-		 return _E_size; 
-	 }
-	 
 	private void init() {
 		FileReader fr=null;
 		try {
@@ -97,7 +93,10 @@ import java.util.Vector;
 				this.print();}
 		} catch (IOException e) {e.printStackTrace();}
 	 }
-	
+	 public double sizeOfE(){
+		 return _E_size; 
+	 }
+	 
 	public VertexSet Ni(int i) {
 		VertexSet ans = _V.elementAt(i);
 		return  ans;
