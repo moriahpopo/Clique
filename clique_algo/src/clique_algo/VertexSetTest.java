@@ -36,6 +36,7 @@ public class VertexSetTest {
 		assertEquals("it must be 2, 3, 4", ver3.toString(), "Set: |3| 2, 3, 4, ");
 		//fail("Not yet implemented");
 	}
+	
 		
 }
 
