@@ -27,6 +27,9 @@ import java.util.Vector;
 		_V = new  Vector <VertexSet>();
 		 init();
 	 }
+	 public double sizeOfE(){
+		 return _E_size; 
+	 }
 	 
 	private void init() {
 		FileReader fr=null;
