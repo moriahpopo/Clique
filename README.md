@@ -1,8 +1,10 @@
 Task 3
 Adding support the calculation based on DFS algorithm
-The main problem;
+
+The main problem:
 Distribution of tasks to multiple computers
-The solution;
+
+The solution:
 The server receives graph with edges, he use the function “Minimal Cliques” that calculate the edges from graph. 
 Then the server sends each time edge to one of the computers array (As calculation algorithm DFS, that sends vertex each time).
 The computers calculates the length of maximal clique 
