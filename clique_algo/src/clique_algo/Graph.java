@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -27,6 +28,7 @@ import java.util.Vector;
 		_V = new  Vector <VertexSet>();
 		 init();
 	 }
+	 
 	private void init() {
 		FileReader fr=null;
 		try {
@@ -93,10 +95,10 @@ import java.util.Vector;
 				this.print();}
 		} catch (IOException e) {e.printStackTrace();}
 	 }
-	 public double sizeOfE(){
-		 return _E_size; 
-	 }
-	 
+	public double sizeOfE(){
+		return _E_size;
+	}
+	
 	public VertexSet Ni(int i) {
 		VertexSet ans = _V.elementAt(i);
 		return  ans;
@@ -319,9 +321,12 @@ import java.util.Vector;
 			Clique curr = ans.elementAt(i);
 			if(curr.size()<max_size) {
 				VertexSet Ni = curr.commonNi();
+				if(curr.size()+Ni.size()<min_size){}
+				else{
 				for(int a=0;a<Ni.size();a++) {
 					Clique c = new Clique(curr,Ni.at(a));
 					ans.add(c);
+				}
 				}
 			}
 			else {i=ans.size();} // speedup trick 
@@ -349,4 +354,76 @@ import java.util.Vector;
 			e.printStackTrace();
 		}
 	}
+	
+//	Memory - insert only one EDGE every time to QUE.
+//	insert e to q
+//	max=2
+//	{
+//	while q is not empty
+//	cl=q.pop
+//	if (cl>max) max=cl
+//	if(cl+ni.cl>max)
+//	q.push(cl+n) ---(n is foreach of cl.ni)
+//	}
+//	return max
+//	choose benchbark
+
+	//show schema for spreading the work on different computers
+	
+	/**
+	 * this function finds the max size clique from all cliques.
+	 */
+	public int MaxSizeAllClique(){
+		Clique.init(this);
+		int maxsize=2;
+		int temp=2;
+		Vector<VertexSet>C0 = allEdges(); // all edges – all cliques of size 2/
+		Vector<VertexSet> ans = new Vector<VertexSet>();
+		int len = C0.size();
+		for(int i=0;i<len;i++) {
+			VertexSet curr_edge = C0.elementAt(i);
+			Clique edge = new Clique(curr_edge.at(0),curr_edge.at(1) );
+			temp=checkSizeSpecCliqebyedge(edge);
+			if(temp>maxsize)maxsize=temp;
+			
+			//System.out.println("alg2 "+i+") edge:["+curr_edge.at(0)+","+curr_edge.at(1)+"]"+C1.size() +"  total: "+count);
+			//addToSet(ans, C1);
+		} 
+	ans=findAllCliqueswithMaxSize(maxsize);
+	return maxsize;
+	}
+	/**
+	 * this function checks  size of clique by edges.
+	 */
+	public int checkSizeSpecCliqebyedge(Clique e){
+		int max = 2;
+		Stack<Clique>st = new Stack<Clique>();
+		st.push(e);
+		while(!st.isEmpty()){
+			Clique curr=st.pop();
+			if(curr.size()>max)max=curr.size(); 
+				VertexSet Ni = curr.commonNi();
+				if(curr.size()+Ni.size()>max){
+				for(int a=0;a<Ni.size();a++) {
+					Clique c = new Clique(curr,Ni.at(a));
+					st.push(c);
+				}
+				}
+		}
+		return max;
+	}
+	/**
+	 * this function finds all cliques with max size
+	 */
+	
+public Vector<VertexSet> findAllCliqueswithMaxSize(int max){
+		Vector<VertexSet> V1;
+	    V1 = All_Cliques_DFS(max, max);
+	    return V1;
+	
+}
+
+
+
+
 }
