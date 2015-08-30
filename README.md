@@ -1,4 +1,4 @@
-Task 3
+Task 3 - 
 Adding support the calculation based on DFS algorithm
 
 The main problem:
